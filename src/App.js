@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+// import DisplayGraph from "./Components/Graph/DisplayGraph";
+import GetSpecificStock from "./Components/stock list/GetSpecificStock.js";
+import StockList from "./Components/stock list/StockList.js";
+import { useState } from "react";
 
 function App() {
+  const [selectedStock, setSelectedStock] = useState("");
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <StockList
+                selectedStock={selectedStock}
+                setSelectedStock={setSelectedStock}
+              />
+            }
+          />
+          <Route
+            path="/stock/:id"
+            element={<GetSpecificStock selectedStock={selectedStock} />}
+          />
+          /
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 

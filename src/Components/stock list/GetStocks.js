@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-
+import { Table } from "antd";
+import { columns } from "./antdColumns.js";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import Loading from "../Spinner/Loading.js";
 
 export default function GetStocks() {
   const [apiData, setApiData] = useState("");
@@ -19,9 +20,7 @@ export default function GetStocks() {
     axios
       .request(options)
       .then(function (response) {
-        console.log(response);
         setApiData(response.data.finance.result[0].quotes);
-        console.log(apiData);
       })
       .catch(function (error) {
         console.error(error);
@@ -34,20 +33,9 @@ export default function GetStocks() {
   return (
     <div>
       {apiData.length > 0 ? (
-        <div>
-          <p>top stocks today</p>
-          {apiData.map((stock) => (
-            <div>
-              <Link to={`/stock/${stock.symbol}`}>
-                <p key={stock.symbol} id={stock.symbol}>
-                  {stock.shortName}, symbol: {stock.symbol}
-                </p>
-              </Link>
-            </div>
-          ))}
-        </div>
+        <Table dataSource={apiData} columns={columns} />
       ) : (
-        <p>Loading stocks...</p>
+        <Loading />
       )}
     </div>
   );

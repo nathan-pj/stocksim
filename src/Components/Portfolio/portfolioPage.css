@@ -1,0 +1,75 @@
+.portfolio-page {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.portfolio-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.portfolio-header,
+.portfolio-row {
+  display: flex;
+  align-items: center;
+}
+
+.portfolio-header {
+  background-color: #b3b3b3;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: bold;
+  border-bottom: 2px solid #0097a7;
+}
+
+.portfolio-row {
+  background-color: #ffffff;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.portfolio-row:nth-child(odd) {
+  background-color: #f7f7f7;
+}
+
+.portfolio-cell {
+  flex: 1;
+  padding: 20px;
+}
+
+.portfolio-symbol {
+  text-align: center;
+  border-right: 1px solid #eeeeee;
+}
+
+.portfolio-value {
+  text-align: center;
+  border-right: 1px solid #eeeeee;
+}
+
+.portfolio-name {
+  text-align: center;
+}
+
+.search-form {
+  display: inline-block;
+  position: relative;
+  margin-left: 20px;
+}
+
+.search-form input[type="text"] {
+  width: 200px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+.search-form input[type="text"]:focus {
+  border: 2px solid #555;
+}

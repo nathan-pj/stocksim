@@ -22,8 +22,9 @@ export default function DisplayGraph({
         chart.current = null;
       }
       chart.current = createChart(chartContainerRef.current, {
-        width: 500,
-        height: 500,
+        width: "100%",
+
+        height: "100%",
         layout: {
           backgroundColor: "#253248",
           textColor: "rgba(255, 255, 255, 0.9)",
@@ -72,9 +73,10 @@ export default function DisplayGraph({
       const formattedStockData = formatData.reverse();
       candleSeries.setData(formattedStockData);
       const onResize = () => {
-        const { width, height } =
-          chartContainerRef.current.getBoundingClientRect();
-        chart.current.resize(width, height);
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+
+        chart.current.resize(width, height / 2);
         chart.current.timeScale().fitContent();
       };
 

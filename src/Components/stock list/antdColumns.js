@@ -6,7 +6,7 @@ const columns = [
     title: "Symbol",
     dataIndex: "symbol",
     key: "symbol",
-    render: (symbol) => <Link to={`/stock/${symbol}`}>{symbol}</Link>,
+    render: (symbol) => <Link to={`/stock/${symbol}`}>{symbol}</Link>, // closing bracket added here
   },
   {
     title: "Company",
@@ -21,18 +21,13 @@ const columns = [
   },
   {
     title: "Change",
-    key: "regularMarketChange",
-    render: (_, record) => {
-      const change = record.regularMarketChange;
-      const changePercent = record.regularMarketChangePercent;
-      let changeTag = <Tag color="#f50">{change}</Tag>;
-      if (change > 0) {
-        changeTag = <Tag color="#87d068">{change}</Tag>;
-      }
-      return (
-        <>
-          {changeTag} ({changePercent}%)
-        </>
+    dataIndex: "change",
+    key: "change",
+    render: (change) => {
+      return change > 0 ? (
+        <Tag color="#87d068">{change}</Tag>
+      ) : (
+        <Tag color="#f50">{change}</Tag>
       );
     },
   },

@@ -17,13 +17,13 @@ function PortfolioPage({ portfolio }) {
     },
   ];
 
-  const dataSource = Object.entries(portfolio.investments).map(
-    ([symbol, investment]) => ({
+  const dataSource = Object.entries(portfolio.investments)
+    .filter(([symbol, investment]) => investment.value !== 0)
+    .map(([symbol, investment]) => ({
       key: symbol,
       symbol: symbol,
       value: investment.value,
-    })
-  );
+    }));
 
   return (
     <div className="portfolio-page">

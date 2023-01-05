@@ -28,6 +28,12 @@ function InvestInput({ symbol, price, portfolio, setPortfolio }) {
     });
   }, [investmentValue]);
   const handleBuy = () => {
+    if (investmentValue > 0) {
+      alert(
+        "You already have a position in this stock! Sell your current position before buying more."
+      );
+      return;
+    }
     if (investmentAmount > portfolio.balance) {
       alert("You do not have enough balance to make this investment!");
       return;
@@ -80,7 +86,7 @@ function InvestInput({ symbol, price, portfolio, setPortfolio }) {
         <button
           className="investment-button"
           onClick={handleSell}
-          style={{ backgroundColor: "red" }}
+          style={{ backgroundColor: "#f54775" }}
         >
           SELL
         </button>

@@ -1,16 +1,21 @@
-.container {
-  display: flex;
-}
 
-.chart {
-  width: 60%;
-}
+
 
 .invest-input {
   width: 40%;
+  text-align: center;
 }
 @media only screen and (max-width: 600px) {
   .stocks-table {
     width: 100%;
   }
 }
+
+.time-range{
+  text-align: left;
+  padding-left: 1vw;
+}
+.filter-stocks{
+  text-align: center;
+}
+

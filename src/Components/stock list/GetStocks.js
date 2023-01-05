@@ -1,42 +1,116 @@
 import { useState, useEffect } from "react";
-import { Table } from "antd";
-import { columns } from "./antdColumns.js";
+import { Table, Radio, Input } from "antd";
+import { Link } from "react-router-dom";
+import { Tag } from "antd";
 import axios from "axios";
-import Loading from "../Spinner/Loading.js";
 
-export default function GetStocks() {
-  const [apiData, setApiData] = useState("");
+const GetStocks = ({ tableData, setTableData }) => {
+  const [pagination, setPagination] = useState({
+    pageSize: 20,
+    hideOnSinglePage: true,
+  });
+  const [selectedOption, setSelectedOption] = useState("actives");
+  const [apiUrl, setApiUrl] = useState(
+    "https://financialmodelingprep.com/api/v3/stock_market/actives?apikey=a88a05c1b85464390aa0564746684c52"
+  );
+  const [searchTerm, setSearchTerm] = useState("");
 
-  const options = {
-    method: "GET",
-    url: "https://yh-finance.p.rapidapi.com/market/get-trending-tickers",
-    params: { region: "US" },
-    headers: {
-      "X-RapidAPI-Key": "636b6813dbmsh5df740a728e2580p127b48jsn6b905ee8e04b",
-      "X-RapidAPI-Host": "yh-finance.p.rapidapi.com",
-    },
-  };
   const fetchData = () => {
     axios
-      .request(options)
-      .then(function (response) {
-        setApiData(response.data.finance.result[0].quotes);
+      .request(apiUrl)
+      .then((response) => {
+        const data = response.data;
+        console.log(response.data);
+        setTableData(data);
+        setPagination({
+          ...pagination,
+          total: data.length,
+        });
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.error(error);
       });
   };
+
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [selectedOption, searchTerm]);
+
+  const columns = [
+    {
+      title: "Symbol",
+      dataIndex: "symbol",
+      key: "symbol",
+      render: (symbol) => <Link to={`/stock/${symbol}`}>{symbol}</Link>,
+    },
+    {
+      title: "Company",
+      dataIndex: "name",
+      key: "name",
+    },
+  ];
+  if (!searchTerm) {
+    columns.push(
+      {
+        title: "Price",
+        dataIndex: "price",
+        key: "price",
+        render: (price) => <span>${price}</span>,
+      },
+      {
+        title: "Change",
+        dataIndex: "change",
+        key: "change",
+        render: (change) => {
+          return (
+            <Tag color={change > 0 ? "#87d068" : "#f50"}>{`${change}%`}</Tag>
+          );
+        },
+      }
+    );
+  }
+  const handleOptionChange = (e) => {
+    setSelectedOption(e.target.value);
+    setApiUrl(
+      `https://financialmodelingprep.com/api/v3/stock_market/${e.target.value}?apikey=a88a05c1b85464390aa0564746684c52`
+    );
+  };
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+    if (e.target.value) {
+      setApiUrl(
+        `https://financialmodelingprep.com/api/v3/search?query=${e.target.value}&limit=20&apikey=a88a05c1b85464390aa0564746684c52`
+      );
+    } else {
+      setApiUrl(
+        `https://financialmodelingprep.com/api/v3/stock_market/${selectedOption}?apikey=a88a05c1b85464390aa0564746684c52`
+      );
+    }
+  };
 
   return (
     <div>
-      {apiData.length > 0 ? (
-        <Table dataSource={apiData} columns={columns} />
-      ) : (
-        <Loading />
-      )}
+      <div className="filter-stocks">
+        <Radio.Group
+          onChange={handleOptionChange}
+          value={selectedOption}
+          style={{ marginBottom: 20 }}
+        >
+          {" "}
+          <Radio value="actives">Active</Radio>
+          <Radio value="gainers">Gainers</Radio>
+          <Radio value="losers">Losers</Radio>
+        </Radio.Group>
+        <Input
+          placeholder="Search for a stock"
+          style={{ width: 200, marginRight: 10 }}
+          onChange={handleSearchChange}
+        />
+      </div>
+      <Table dataSource={tableData} columns={columns} pagination={pagination} />
     </div>
   );
-}
+};
+
+export default GetStocks;

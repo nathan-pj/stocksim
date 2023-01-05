@@ -1,6 +1,6 @@
 import axios from "axios";
 import "./price.css";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Loading from "../Spinner/Loading.js";
 
 export default function GetPrice({ symbol, price, setPrice }) {
@@ -28,7 +28,7 @@ export default function GetPrice({ symbol, price, setPrice }) {
         <div>{price}</div>
       ) : (
         <div>
-          Fetching price... <Loading />
+          Getting price... <Loading />
         </div>
       )}
     </div>

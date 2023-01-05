@@ -13,15 +13,24 @@ function App() {
     balance: 1000000,
     investments: {},
   });
+  const [tableData, setTableData] = useState([]);
   const [selectedStock, setSelectedStock] = useState("");
   const [loading, setLoading] = useState(true);
+  const [display, setDisplay] = useState("trending");
+
   useEffect(() => {
     console.log(portfolio);
   }, [portfolio]);
   return (
     <BrowserRouter>
       <div className="App">
-        <NavBar portfolio={portfolio} />
+        <NavBar
+          portfolio={portfolio}
+          tableData={tableData}
+          setTableData={setTableData}
+          display={display}
+          setDisplay={setDisplay}
+        />
 
         <Routes>
           <Route
@@ -31,6 +40,10 @@ function App() {
                 portfolio={portfolio}
                 loading={loading}
                 setLoading={setLoading}
+                tableData={tableData}
+                setTableData={setTableData}
+                display={display}
+                setDisplay={setDisplay}
               />
             }
           />

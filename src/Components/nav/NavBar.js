@@ -1,13 +1,27 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./nav.css";
 
-function NavBar({ portfolio }) {
+function NavBar({ portfolio, display, setDisplay }) {
+  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
+  const [tableData, setTableData] = useState([]);
 
   const handleSubmit = (event) => {
+    setDisplay("search");
     event.preventDefault();
-    // TODO: Perform search using `searchTerm`
+    axios
+      .get(
+        `https://financialmodelingprep.com/api/v3/search?query=${searchTerm}&limit=10&apikey=a88a05c1b85464390aa0564746684c52`
+      )
+      .then((response) => {
+        console.log(response.data);
+        setTableData(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
@@ -15,14 +29,7 @@ function NavBar({ portfolio }) {
       <Link to="/">Home</Link>
 
       <Link to="/portfolio">Portfolio</Link>
-      <form className="search-form" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Search stocks"
-          value={searchTerm}
-          onChange={(event) => setSearchTerm(event.target.value)}
-        />
-      </form>
+
       <div>Balance: ${portfolio.balance.toLocaleString("en-US")}</div>
     </nav>
   );

@@ -5,12 +5,13 @@ import DisplayGraph from "../Graph/CandleStick.js";
 import InvestInput from "../Buy/InvestInput.js";
 import GetPrice from "../Graph/GetPrice.js";
 import "./stockList.css";
+import InfoIcon from "../Graph/InfoIcon.js";
 // const API_KEY = "a88a05c1b85464390aa0564746684c52"
 
 function GetSpecificStock({ portfolio, setPortfolio, loading, setLoading }) {
   const location = useLocation();
   const symbol = location.pathname.split("/").pop();
-  const [timeRange, setTimeRange] = useState("/5min");
+  const [timeRange, setTimeRange] = useState("/1min");
   const [apiData, setApiData] = useState([]);
   const [price, setPrice] = useState(0);
   const [API_URL, setAPI_URL] = useState(
@@ -54,21 +55,24 @@ function GetSpecificStock({ portfolio, setPortfolio, loading, setLoading }) {
               loading={loading}
               setLoading={setLoading}
             />
-            <label>
-              Interval:
-              <select
-                value={timeRange}
-                onChange={(e) => setTimeRange(e.target.value)}
-              >
-                <option value="/1min">1 min</option>
 
-                <option value="/5min">5 min</option>
-                <option value="/1hour">1 hour</option>
-                <option value="/1day">1 day</option>
+            <div className="time-range">
+              <label>
+                Interval:
+                <select
+                  value={timeRange}
+                  onChange={(e) => setTimeRange(e.target.value)}
+                >
+                  <option value="/1min">1 min</option>
 
-                <option value="/alltime">all time</option>
-              </select>
-            </label>
+                  <option value="/5min">5 min</option>
+                  <option value="/1hour">1 hour</option>
+                  <option value="/1day">1 day</option>
+
+                  <option value="/alltime">all time</option>
+                </select>
+              </label>
+            </div>
           </div>
           <div className="invest-input">
             <GetPrice symbol={symbol} price={price} setPrice={setPrice} />

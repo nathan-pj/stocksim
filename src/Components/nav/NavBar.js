@@ -29,6 +29,7 @@ function NavBar({ portfolio, display, setDisplay }) {
       <Link to="/">Home</Link>
 
       <Link to="/portfolio">Portfolio</Link>
+      <Link to="/news">News</Link>
 
       <div>Balance: ${portfolio.balance.toLocaleString("en-US")}</div>
     </nav>

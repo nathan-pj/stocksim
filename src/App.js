@@ -7,6 +7,7 @@ import NavBar from "./Components/nav/NavBar.js";
 import { useEffect, useState } from "react";
 import PortfolioPage from "./Components/Portfolio/PortfolioPage.js";
 import GetStocks from "./Components/stock list/GetStocks.js";
+import News from "./Components/news/News.js";
 
 function App() {
   const [portfolio, setPortfolio] = useState({
@@ -65,6 +66,7 @@ function App() {
             loading={loading}
             setLoading={setLoading}
           />
+          <Route path="/news" element={<News />} />
         </Routes>
       </div>
     </BrowserRouter>

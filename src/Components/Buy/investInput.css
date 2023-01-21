@@ -3,6 +3,9 @@
   flex-direction: column;
   align-items: center;
   color: rgb(197, 197, 197);
+  text-align: center;
+  margin:auto;
+
 }
 
 .investment-label {

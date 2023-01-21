@@ -74,7 +74,7 @@ function GetSpecificStock({ portfolio, setPortfolio, loading, setLoading }) {
               </label>
             </div>
           </div>
-          <div className="invest-input">
+          <div className="center">
             <GetPrice symbol={symbol} price={price} setPrice={setPrice} />
             <InvestInput
               symbol={symbol}

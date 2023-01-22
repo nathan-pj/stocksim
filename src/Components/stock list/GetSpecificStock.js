@@ -1,4 +1,6 @@
 import axios from "axios";
+import { Table, Radio, Input } from "antd";
+
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import DisplayGraph from "../Graph/CandleStick.js";
@@ -57,21 +59,19 @@ function GetSpecificStock({ portfolio, setPortfolio, loading, setLoading }) {
             />
 
             <div className="time-range">
-              <label>
-                Interval:
-                <select
-                  value={timeRange}
-                  onChange={(e) => setTimeRange(e.target.value)}
-                >
-                  <option value="/1min">1 min</option>
-
-                  <option value="/5min">5 min</option>
-                  <option value="/1hour">1 hour</option>
-                  <option value="/1day">1 day</option>
-
-                  <option value="/alltime">all time</option>
-                </select>
-              </label>
+              <Radio.Group
+                onChange={(e) => setTimeRange(e.target.value)}
+                value={timeRange}
+                style={{
+                  marginTop: 10,
+                }}
+              >
+                <Radio.Button value="/1min">1m</Radio.Button>
+                <Radio.Button value="/5min">5m</Radio.Button>
+                <Radio.Button value="/1hour">1h</Radio.Button>
+                <Radio.Button value="/1day">1d</Radio.Button>
+                <Radio.Button value="/alltime">all</Radio.Button>
+              </Radio.Group>
             </div>
           </div>
           <div className="center">

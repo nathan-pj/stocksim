@@ -25,7 +25,7 @@ export default function GetPrice({ symbol, price, setPrice }) {
   return (
     <div className="price">
       {price && price > 0 ? (
-        <div>{price}</div>
+        <div>${price}</div>
       ) : (
         <div>
           Getting price... <Loading />

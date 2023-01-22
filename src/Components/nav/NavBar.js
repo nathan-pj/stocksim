@@ -25,14 +25,16 @@ function NavBar({ portfolio, display, setDisplay }) {
   };
 
   return (
-    <nav>
-      <Link to="/">Home</Link>
+    <div className="nav-items">
+      <nav>
+        <Link to="/">Home</Link>
 
-      <Link to="/portfolio">Portfolio</Link>
-      <Link to="/news">News</Link>
+        <Link to="/portfolio">Portfolio</Link>
+        <Link to="/news">News</Link>
 
-      <div>Balance: ${portfolio.balance.toLocaleString("en-US")}</div>
-    </nav>
+        <div>Balance: ${portfolio.balance.toLocaleString("en-US")}</div>
+      </nav>
+    </div>
   );
 }
 

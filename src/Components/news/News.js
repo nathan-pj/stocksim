@@ -38,6 +38,7 @@ const News = () => {
               <Card.Meta
                 title={
                   <Typography.Title
+                    align="top"
                     level={5}
                     ellipsis={false}
                     style={{ maxWidth: "100px" }}

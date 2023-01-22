@@ -28,7 +28,11 @@ function PortfolioPage({ portfolio }) {
   return (
     <div className="portfolio-page">
       <br />
-      <Table columns={columns} dataSource={dataSource} />
+      {dataSource.length !== 0 ? (
+        <Table columns={columns} dataSource={dataSource} />
+      ) : (
+        <p>No current investments</p>
+      )}
     </div>
   );
 }

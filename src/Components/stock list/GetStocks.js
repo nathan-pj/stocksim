@@ -95,16 +95,18 @@ const GetStocks = ({ tableData, setTableData }) => {
         <Radio.Group
           onChange={handleOptionChange}
           value={selectedOption}
-          style={{ marginBottom: 20 }}
+          defaultValue="a"
+          style={{
+            marginTop: 16,
+          }}
         >
-          {" "}
-          <Radio value="actives">Active</Radio>
-          <Radio value="gainers">Gainers</Radio>
-          <Radio value="losers">Losers</Radio>
+          <Radio.Button value="actives">Active</Radio.Button>
+          <Radio.Button value="gainers">Gainers</Radio.Button>
+          <Radio.Button value="losers">Losers</Radio.Button>
         </Radio.Group>
         <Input
           placeholder="Search for a stock"
-          style={{ width: 200, marginRight: 10 }}
+          style={{ width: 275, marginRight: 10, marginLeft: 50 }}
           onChange={handleSearchChange}
         />
       </div>

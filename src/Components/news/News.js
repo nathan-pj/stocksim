@@ -1,14 +1,17 @@
 import { List, Card, Typography, Button } from "antd";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+
 import "./news.css";
+import apiKey from "../apiKey.js";
+
 const News = () => {
   const [news, setNews] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios(
-        "https://financialmodelingprep.com/api/v3/stock_news?limit=50&apikey=a88a05c1b85464390aa0564746684c52"
+        `https://financialmodelingprep.com/api/v3/stock_news?limit=50&apikey=${apiKey}`
       );
       console.log(result.data);
       setNews(result.data);

@@ -8,7 +8,7 @@ import InvestInput from "../Buy/InvestInput.js";
 import GetPrice from "../Graph/GetPrice.js";
 import "./stockList.css";
 import InfoIcon from "../Graph/InfoIcon.js";
-// const API_KEY = "a88a05c1b85464390aa0564746684c52"
+import apiKey from "../apiKey.js";
 
 function GetSpecificStock({ portfolio, setPortfolio, loading, setLoading }) {
   const location = useLocation();
@@ -17,7 +17,7 @@ function GetSpecificStock({ portfolio, setPortfolio, loading, setLoading }) {
   const [apiData, setApiData] = useState([]);
   const [price, setPrice] = useState(0);
   const [API_URL, setAPI_URL] = useState(
-    `https://financialmodelingprep.com/api/v3/historical-chart${timeRange}/${symbol}?&apikey=a88a05c1b85464390aa0564746684c52`
+    `https://financialmodelingprep.com/api/v3/historical-chart${timeRange}/${symbol}?&apikey=${apiKey}`
   );
   useEffect(() => {
     function fetchData() {
@@ -82,6 +82,13 @@ function GetSpecificStock({ portfolio, setPortfolio, loading, setLoading }) {
               portfolio={portfolio}
               setPortfolio={setPortfolio}
             />
+          </div>
+          <div className="info ">
+            Scroll too zoom on the graph.
+            <br />
+            <br />
+            <br /> Invest any amount (under your balance) into this stock and
+            then go into 'portfolio' on the navbar to check its performance!
           </div>
         </div>
       ) : (

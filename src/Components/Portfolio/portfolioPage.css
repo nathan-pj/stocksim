@@ -73,3 +73,6 @@
 .search-form input[type="text"]:focus {
   border: 2px solid #555;
 }
+.no-investments{
+  text-align: center;
+}

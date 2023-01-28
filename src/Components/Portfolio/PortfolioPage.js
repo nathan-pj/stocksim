@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Table } from "antd";
-
+import "./portfolioPage.css";
 function PortfolioPage({ portfolio }) {
   const columns = [
     {
@@ -31,7 +31,9 @@ function PortfolioPage({ portfolio }) {
       {dataSource.length !== 0 ? (
         <Table columns={columns} dataSource={dataSource} />
       ) : (
-        <p>No current investments</p>
+        <div className="no-investments">
+          <p>No investments yet!</p>
+        </div>
       )}
     </div>
   );

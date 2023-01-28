@@ -3,6 +3,7 @@ import { Table, Radio, Input } from "antd";
 import { Link } from "react-router-dom";
 import { Tag } from "antd";
 import axios from "axios";
+import apiKey from "../apiKey.js";
 
 const GetStocks = ({ tableData, setTableData }) => {
   const [pagination, setPagination] = useState({
@@ -11,7 +12,7 @@ const GetStocks = ({ tableData, setTableData }) => {
   });
   const [selectedOption, setSelectedOption] = useState("actives");
   const [apiUrl, setApiUrl] = useState(
-    "https://financialmodelingprep.com/api/v3/stock_market/actives?apikey=a88a05c1b85464390aa0564746684c52"
+    `https://financialmodelingprep.com/api/v3/stock_market/actives?apikey=${apiKey}`
   );
   const [searchTerm, setSearchTerm] = useState("");
 
